@@ -1,6 +1,12 @@
+from libro import Libro
+from carro_compra import CarroCompras
 class TiendaLibros:
-    pass
     # Defina metodo inicializador __init__
+    def __init__(self):
+        self.catalogo: dict[str, Libro] = {}
+        carrito = CarroCompras()
+
+        
 
     # Defina metodo adicionar_libro_a_catalogo
 
