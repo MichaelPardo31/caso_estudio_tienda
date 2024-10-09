@@ -8,7 +8,13 @@ class TiendaLibros:
 
         
 
-    # Defina metodo adicionar_libro_a_catalogo
+    def adicionar_libro_a_catalogo(self, isbn: str, titulo: str, precio: float, existencias: int):
+        self.isbn = isbn
+        self.titulo = titulo
+        self.precio = precio
+        self.existencias = existencias
+        
+        return 
 
     # Defina metodo agregar_libro_a_carrito
 
