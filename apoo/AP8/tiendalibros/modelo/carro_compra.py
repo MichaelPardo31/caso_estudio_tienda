@@ -2,14 +2,14 @@ from item_compra import ItemCompra
 
 class CarroCompras:
     # Defina metodo inicializador __init__(self)
-    def __init__(self, item: list[ItemCompra]):
+    def __init__(self):
         self.item: list[ItemCompra] = []
 
     # Defina el metodo agregar_item
-    def agregar_item(self):
-        objeto = ItemCompra("Narnia", "4")
+    def agregar_item(self, libro, cantidad: int):
+        objeto = ItemCompra(libro, cantidad)
         self.item.append(objeto)
-        return self.item
+        return objeto
 
     # Defina el metodo calcular_total
     def calcular_total(self):
@@ -18,4 +18,4 @@ class CarroCompras:
         
     # Defina el metodo quitar_item
     def quitar_item(self, isbn):
-        eliminar_item = [x for x in self.item if x == isbn]
+        self.item = [x for x in self.item if x.libro.isbn != isbn]

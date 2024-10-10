@@ -1,5 +1,6 @@
 from libro import Libro
 from carro_compra import CarroCompras
+
 class TiendaLibros:
     # Defina metodo inicializador __init__
     def __init__(self):
@@ -9,13 +10,23 @@ class TiendaLibros:
         
 
     def adicionar_libro_a_catalogo(self, isbn: str, titulo: str, precio: float, existencias: int):
-        self.isbn = isbn
-        self.titulo = titulo
-        self.precio = precio
-        self.existencias = existencias
-        
-        return 
+        if isbn in self.catalogo:
+            raise LibroExistenteError(isbn, titulo)
+        libro = Libro(isbn, titulo, precio, existencias)
+        self.catalogo[isbn] = libro
+        return libro
 
     # Defina metodo agregar_libro_a_carrito
+    def agregar_libro_a_carrito(self, isbn: str, cantidad: int):
+        libro = self.catalogo.get(isbn)
+        if libro is None:
+            raise LibroAgotadoError(isbn, libro.titulo)
 
-    # Defina metodo retirar_item_de_carrito
+        if libro.existencias < cantidad:
+            raise ExistenciasInsuficientesError(isbn, libro.titulo, cantidad, libro.existencias)
+
+        libro.existencias -= cantidad
+        return self.carrito.agregar_item(libro, cantidad)
+
+    def retirar_item_de_carrito(self, isbn: str):
+        self.carrito.quitar_item(isbn)
