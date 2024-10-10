@@ -38,8 +38,27 @@ class UIConsola:
             else:
                 print(f"{opcion} no es una opción válida")
 
-    # Defina el metodo retirar_libro_de_carrito_de_compras
+    def retirar_libro_de_carrito_de_compras(self):
+        isbn = input("Ingrese el ISBN del libro que desea retirar: ")
+        self.tienda.retirar_item_de_carrito(isbn)
+        print("Libro retirado exitosamente del carrito.")
 
-    # Defina el metodo agregar_libro_a_carrito_de_compras
+    def agregar_libro_a_carrito_de_compras(self):
+        isbn = input("Ingrese el ISBN del libro que desea agregar: ")
+        cantidad = int(input("Ingrese la cantidad de unidades: "))
+        try:
+            self.tienda.agregar_libro_a_carrito(isbn, cantidad)
+            print(f"{cantidad} unidades del libro con ISBN {isbn} fueron añadidas al carrito.")
+        except LibroError as e:
+            print(f"Error: {str(e)}")
 
-    # Defina el metodo adicionar_un_libro_a_catalogo
+    def adicionar_un_libro_a_catalogo(self):
+        isbn = input("Ingrese el ISBN: ")
+        titulo = input("Ingrese el titulo: ")
+        precio = float(input("Ingrese el precio: "))
+        existencias = int(input("Ingrese las existencias: "))
+        try:
+            self.tienda.adicionar_libro_a_catalogo(isbn, titulo, precio, existencias)
+            print(f"El libro '{titulo}' fue añadido al catálogo exitosamente.")
+        except LibroError as e:
+            print(f"Error: {str(e)}")
